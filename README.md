@@ -12,6 +12,6 @@ Ein FiveM Kampfunfähigkeits Script das dafür sorgt, dass die Spieler nicht dir
 - Ein Ambulance Script mit Revive Trigger z.B esx-ambulancejob oder ak47_ambulancejob
 ## License
 
-This script is licensed under the a Custom License [LICENSE](LICENSE).
+This script is licensed under the a Custom License [LICENSE](LICENSE.md).
 
 © 141Reaper
