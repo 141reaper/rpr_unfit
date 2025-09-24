@@ -12,18 +12,18 @@ Config.AmbulanceJob = "ambulance" -- Name of your esx ambulance job
 Config.QBAmbulanceJob = "ambulance" -- Name of your qbcore ambulance job
 
 -- Display Settings
-Config.UseModernHUD = true -- Use the new styled HUD
+Config.UseModernHUD = false -- Use the new styled HUD
 Config.HUDPosition = {x = 0.5, y = 0.80} -- HUD position on screen
 Config.HUDScale = {x = 0.5, y = 0.5} -- HUD text scale
 Config.HUDColor = {r = 255, g = 255, b = 255, a = 255} -- HUD text color
-Config.ShowHUDBackground = true -- Show a background behind the HUD text
+Config.ShowHUDBackground = false -- Show a background behind the HUD text
 Config.BackgroundColor = {r = 0, g = 0, b = 0, a = 150} -- HUD background color
 Config.UseNotifications = true -- Use on-screen notifications
 Config.NotificationType = 'esx' -- Options: 'esx', 'qb', 'custom', 'okok', 'mythic'
 
 -- Feature Settings
-Config.DisableVehicleExit = true -- Prevent player from exiting vehicle when unfit
-Config.DisableVehicleControls = true -- Disable vehicle controls when unfit
+Config.DisableVehicleExit = false -- Prevent player from exiting vehicle when unfit
+Config.DisableVehicleControls = false -- Disable vehicle controls when unfit
 Config.AllowMedicsToRevive = true -- Allow medics to revive unfit players
 Config.MedicReviveCooldown = 300 -- Cooldown for medic revives (in seconds)
 Config.EnablePersistence = true -- Save unfit status between server restarts
@@ -32,8 +32,7 @@ Config.DebugMode = false -- Enable debug mode
 -- Integration Hooks
 Config.UseEventHooks = true -- Enable hooks for other scripts to interact with unfit
 Config.TriggerCommands = { -- Commands that can trigger unfit state
-    "/respawn",
-    "/kill"
+    -- Leere Liste, da Kampfunfähigkeit nur durch den Revive-Trigger ausgelöst werden soll
 }
 
 -- Advanced Settings
@@ -55,6 +54,11 @@ Config.Lang = {
     ["unfit_saved"] = "Dein Kampfunfähigkeitsstatus wurde gespeichert",
     ["unfit_restored"] = "Dein vorheriger Kampfunfähigkeitsstatus wurde wiederhergestellt",
     ["unfit_cooldown"] = "Du musst noch %s Sekunden warten, bevor du diese Aktion ausführen kannst",
+    ["unfit_time_set"] = "Deine Kampfunfähigkeit wurde auf %s Sekunden gesetzt",
+    ["unfit_invalid_time"] = "Ungültige Zeitangabe",
+    ["unfit_invalid_id"] = "Ungültige Spieler-ID",
+    ["unfit_not_unfit"] = "Dieser Spieler ist nicht kampfunfähig",
+    ["unfit_already_unfit"] = "Du bist bereits kampfunfähig",
 
     -- Server
     ["unfit_removed_for1"] = "Du hast den Kampfunfähigkeitsstatus für Spieler ",

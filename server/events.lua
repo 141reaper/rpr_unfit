@@ -151,6 +151,48 @@ AddEventHandler("rpr_unfit:checkStatus", function(target)
     end
 end)
 
+-- Event zum Setzen der Unfit-Zeit eines Spielers
+RegisterNetEvent("rpr_unfit:setPlayerUnfitTime")
+AddEventHandler("rpr_unfit:setPlayerUnfitTime", function(targetId, newTime)
+    local src = source
+    
+    -- Prüfen, ob der Spieler Admin ist
+    if not IsPlayerAdmin(src) then
+        NotifyPlayer(src, Config.Lang["unfit_not_admin"])
+        return
+    end
+    
+    -- Prüfen, ob Ziel-ID gültig ist
+    if targetId and newTime and newTime > 0 then
+        local targetIdentifier = GetPlayerIdentifier(targetId)
+        
+        if targetIdentifier then
+            -- Setze die neue Unfit-Zeit für den Spieler
+            if unfitPlayers[targetIdentifier] then
+                unfitPlayers[targetIdentifier] = newTime
+                
+                -- Aktualisiere den Client
+                TriggerClientEvent("rpr_unfit:start", targetId, newTime)
+                
+                -- Aktualisiere die Datenbank, falls aktiviert
+                if Config.UseDatabase and hasMySQL then
+                    SaveUnfitStatus(targetIdentifier, newTime)
+                end
+                
+                -- Benachrichtige den Admin
+                NotifyPlayer(src, "Unfit-Zeit für Spieler " .. targetId .. " auf " .. newTime .. " Sekunden gesetzt")
+            else
+                -- Spieler ist nicht kampfunfähig
+                NotifyPlayer(src, "Spieler " .. targetId .. " ist nicht kampfunfähig")
+            end
+        else
+            NotifyPlayer(src, Config.Lang["unfit_no_player_id"])
+        end
+    else
+        NotifyPlayer(src, "Ungültige Spieler-ID oder Zeit")
+    end
+end)
+
 -- Admin command to reset unfit status
 RegisterCommand("resetunfit", function(source, args, rawCommand)
     if not IsPlayerAdmin(source) then
@@ -159,6 +201,10 @@ RegisterCommand("resetunfit", function(source, args, rawCommand)
     end
     
     local targetId = tonumber(args[1])
+
+    if args[1] == "me" then
+       targetId = source
+    end
     if targetId then
         local targetIdentifier = GetPlayerIdentifier(targetId)
         
