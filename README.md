@@ -17,7 +17,7 @@ Ein fortschrittliches FiveM Kampfunfähigkeitssystem, das dafür sorgt, dass Spi
 ## Dependencies
 
 - ESX Legacy oder QBCore (Framework kann in der Konfiguration ausgewählt werden)
-- Ein Sanitätssystem mit Revive-Trigger (z.B. esx_ambulancejob, qb-ambulancejob oder ak47_ambulancejob)
+- Ein Ambulance mit Revive-Trigger (z.B. esx_ambulancejob, qb-ambulancejob oder ak47_ambulancejob)
 - OxMySQL (optional, für Datenbank-Persistenz)
 
 ## Installation
