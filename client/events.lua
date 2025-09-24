@@ -1,7 +1,11 @@
--- RPR Unfit - Client Events
--- Register ESX Revive Event
+
 RegisterNetEvent(Config.ReviveTrigger)
 AddEventHandler(Config.ReviveTrigger, function()
+    TriggerUnfitState()
+end)
+
+RegisterNetEvent(Config.QBReviveTrigger)
+AddEventHandler(Config.QBReviveTrigger, function()
     TriggerUnfitState()
 end)
 
@@ -90,15 +94,23 @@ RegisterCommand("forceunfit", function(source, args)
     end
 end, false)
 
+RegisterCommand("setunfittime", function(source, args)
+    local targetId = args[1] and tonumber(args[1])
+    local newTime = args[2] and tonumber(args[2])
+    
+    if not targetId then
+        ShowNotification("Bitte gib eine Spieler-ID an")
+        return
+    end
+    
+    if not newTime or newTime <= 0 then
+        ShowNotification(Config.Lang["unfit_invalid_time"])
+        return
+    end
+    
+    -- Sendet einen Server-Event, um die Zeit für den angegebenen Spieler zu ändern
+    TriggerServerEvent('rpr_unfit:setPlayerUnfitTime', targetId, newTime)
+end, false)
+
 -- Key Mapping
 RegisterKeyMapping('unfithud', 'Kampfunfähigkeits-HUD ein-/ausblenden', 'keyboard', 'n')
-
--- Integration with trigger commands
-if Config.UseEventHooks then
-    for _, cmd in pairs(Config.TriggerCommands) do
-        local cleanCmd = cmd:gsub("/", "")
-        RegisterCommand(cleanCmd, function()
-            TriggerServerEvent("rpr_unfit:trigger")
-        end, false)
-    end
-end

@@ -43,28 +43,9 @@ Die Datei `config.lua` bietet umfangreiche Anpassungsmöglichkeiten:
 
 - `/unfitadmin [spieler-id]` - Admin-Befehl zum Zurücksetzen des Kampfunfähigkeitsstatus eines Spielers
 - `/unfithud` - Blendet die Unfit-HUD-Anzeige ein/aus
-- `/unfitstatus [spieler-id]` - Zeigt den aktuellen Kampfunfähigkeitsstatus eines Spielers an
-- `/unfitforce [spieler-id]` - Erzwingt den Kampfunfähigkeitsstatus für einen Spieler
-- `/unfitrevive [spieler-id]` - Erlaubt Sanitätern, einen kampfunfähigen Spieler zu behandeln
-
-## Ordnerstruktur
-
-```
-rpr_unfit/
-├── client/
-│   ├── main.lua     - Hauptclientcode und Initialisierung
-│   ├── events.lua   - Clientseitige Event-Handler
-│   └── ui.lua       - UI-Rendering und HUD-Funktionen
-├── server/
-│   ├── main.lua     - Hauptservercode und Initialisierung
-│   ├── database.lua - Datenbankfunktionen
-│   ├── events.lua   - Serverseitige Event-Handler
-│   └── utils.lua    - Framework-spezifische Hilfsfunktionen
-├── config.lua       - Hauptkonfigurationsdatei
-├── fxmanifest.lua   - Resource-Manifest
-├── LICENSE.md       - Lizenzinformationen
-└── README.md        - Dokumentation
-```
+- `/unfitcheck [spieler-id]` - Zeigt den aktuellen Kampfunfähigkeitsstatus eines Spielers an
+- `/forceunfit [spieler-id]` - Erzwingt den Kampfunfähigkeitsstatus für einen Spieler
+- `/setunfittime [spieler-id] [zeit in sekunden]` - Erlaubt admins spielern Kampfunfähigkeits Zeit hinzuzufügen
 
 ## Integration in andere Skripte
 

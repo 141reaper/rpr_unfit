@@ -150,15 +150,27 @@ end
 
 -- Utility Functions
 function FormatUnfitTime(totalSeconds)
-    if totalSeconds >= 3600 then
-        local hours = math.floor(totalSeconds / 3600)
-        local minutes = math.floor((totalSeconds % 3600) / 60)
-        local seconds = totalSeconds % 60
-        return string.format("%02d:%02d:%02d", hours, minutes, seconds)
+    -- Konstanten für die Zeitumrechnung
+    local SECONDS_PER_MINUTE = 60
+    local SECONDS_PER_HOUR = 3600
+    local SECONDS_PER_DAY = 86400
+    
+    -- Berechnung der Tage, Stunden, Minuten und Sekunden
+    local days = math.floor(totalSeconds / SECONDS_PER_DAY)
+    local hours = math.floor((totalSeconds % SECONDS_PER_DAY) / SECONDS_PER_HOUR)
+    local minutes = math.floor((totalSeconds % SECONDS_PER_HOUR) / SECONDS_PER_MINUTE)
+    local seconds = totalSeconds % SECONDS_PER_MINUTE
+    
+    -- Format je nach Größe anpassen
+    if days > 0 then
+        -- Format mit Tagen
+        return string.format("%dd %02dh %02dm %02ds", days, hours, minutes, seconds)
+    elseif hours > 0 then
+        -- Format mit Stunden
+        return string.format("%02dh %02dm %02ds", hours, minutes, seconds)
     else
-        local minutes = math.floor(totalSeconds / 60)
-        local seconds = totalSeconds % 60
-        return string.format("%02d:%02d", minutes, seconds)
+        -- Format nur mit Minuten und Sekunden
+        return string.format("%02dm %02ds", minutes, seconds)
     end
 end
 
